@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A responsive European pricing and payment prototype with browser-only authentication, Diners Club-only checkout, platform WebAuthn verification, test-card autofill, and full success and failure result pages." />
+  <title>AgentAISLM — European pricing</title>
+  <link rel="icon" href="favicon.ico?v=3" sizes="any" />
+  <link rel="shortcut icon" href="favicon.ico?v=3" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=3" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=3" />
+  <meta name="theme-color" content="#6655e8" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="AgentAISLM home">
+      <span class="brand-mark image-mark" aria-hidden="true"><img src="agentaislm-logo.png" alt="" /></span>
+      <span>AgentAISLM</span>
+    </a>
+
+    <nav class="header-actions" aria-label="Primary navigation">
+      <a href="#plans">Plans</a>
+      <a href="#payments">Payments</a>
+      <button class="ghost-button settings-trigger" type="button" id="settingsButton" aria-label="Open settings">
+        <span aria-hidden="true">⚙</span><span>Settings</span>
+      </button>
+      <button class="ghost-button" type="button" id="signInButton">Log in</button>
+      <button class="dark-button compact" type="button" data-plan="Plus">Get started</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow">Built for Europe</div>
+      <h1 id="page-title">Choose a plan.<br />Pay with Diners Club.</h1>
+      <p>
+        Clear European pricing, country-aware VAT and a Diners Club-only checkout —
+        presented as a safe front-end demonstration with no live payment connection.
+      </p>
+
+      <div class="hero-controls" aria-label="Pricing controls">
+        <label class="field compact-field">
+          <span>Billing country</span>
+          <select id="countrySelect" aria-label="Billing country">
+            <option value="DE">Germany</option>
+            <option value="FR">France</option>
+            <option value="NL">Netherlands</option>
+            <option value="BE">Belgium</option>
+            <option value="PL">Poland</option>
+            <option value="AT">Austria</option>
+            <option value="ES">Spain</option>
+            <option value="IT">Italy</option>
+            <option value="IE">Ireland</option>
+            <option value="PT">Portugal</option>
+            <option value="SE">Sweden</option>
+            <option value="DK">Denmark</option>
+            <option value="FI">Finland</option>
+            <option value="GB">United Kingdom</option>
+            <option value="CH">Switzerland</option>
+          </select>
+        </label>
+
+        <div class="billing-toggle" role="group" aria-label="Billing frequency">
+          <button type="button" class="toggle-option active" data-cycle="monthly">Monthly</button>
+          <button type="button" class="toggle-option" data-cycle="annual">
+            Annual <span>Save 20%</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="plans-section" id="plans" aria-labelledby="plans-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Individual plans</p>
+          <h2 id="plans-title">Simple pricing, no hidden platform fees.</h2>
+        </div>
+        <p id="taxSummary">Prices shown before estimated German VAT.</p>
+      </div>
+
+      <div class="plan-grid">
+        <article class="plan-card" data-plan-card="Free">
+          <div class="plan-top">
+            <h3>Free</h3>
+            <p>For exploring the essentials.</p>
+          </div>
+          <div class="price-row">
+            <span class="price" data-monthly="0">€0</span>
+            <span class="price-period">/ month</span>
+          </div>
+          <div class="annual-price-note" data-annual-plan="Free">Annual: €0.00 / year</div>
+          <button class="plan-button secondary" type="button" data-plan="Free">Start free</button>
+          <ul>
+            <li>Essential AI conversations</li>
+            <li>Limited file uploads</li>
+            <li>Standard response speed</li>
+            <li>Community support</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" data-plan-card="Go">
+          <div class="plan-top">
+            <h3>Go</h3>
+            <p>For everyday study and personal projects.</p>
+          </div>
+          <div class="price-row">
+            <span class="price" data-monthly="3">€3</span>
+            <span class="price-period">/ month</span>
+          </div>
+          <div class="annual-price-note" data-annual-plan="Go">Annual: €28.80 / year · save 20%</div>
+          <button class="plan-button secondary" type="button" data-plan="Go">Choose Go</button>
+          <ul>
+            <li>Everything in Free</li>
+            <li>More messages and uploads</li>
+            <li>Faster image generation</li>
+            <li>Longer conversation history</li>
+          </ul>
+        </article>
+
+        <article class="plan-card featured" data-plan-card="Plus">
+          <div class="popular-label">Most popular</div>
+          <div class="plan-top">
+            <h3>Plus</h3>
+            <p>For advanced work, learning and creation.</p>
+          </div>
+          <div class="price-row">
+            <span class="price" data-monthly="5">€5</span>
+            <span class="price-period">/ month</span>
+          </div>
+          <div class="annual-price-note" data-annual-plan="Plus">Annual: €48.00 / year · save 20%</div>
+          <button class="plan-button primary" type="button" data-plan="Plus">Choose Plus</button>
+          <ul>
+            <li>Everything in Go</li>
+            <li>Advanced reasoning models</li>
+            <li>Expanded research tools</li>
+            <li>Projects and scheduled tasks</li>
+            <li>Priority response speed</li>
+          </ul>
+        </article>
+
+        <article class="plan-card" data-plan-card="Pro">
+          <div class="plan-top">
+            <h3>Pro</h3>
+            <p>For demanding research and development.</p>
+          </div>
+          <div class="price-row">
+            <span class="price" data-monthly="20">€20</span>
+            <span class="price-period">/ month</span>
+          </div>
+          <div class="annual-price-note" data-annual-plan="Pro">Annual: €192.00 / year · save 20%</div>
+          <button class="plan-button secondary" type="button" data-plan="Pro">Choose Pro</button>
+          <ul>
+            <li>Everything in Plus</li>
+            <li>Highest usage allowance</li>
+            <li>Maximum research capacity</li>
+            <li>Priority access to new tools</li>
+            <li>Enhanced workspace controls</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="payment-preview" id="payments" aria-labelledby="payments-title">
+      <div class="preview-copy">
+        <p class="section-kicker">Diners Club checkout</p>
+        <h2 id="payments-title">One European flow, Diners Club only.</h2>
+        <p>
+          Every country uses the same Diners Club-related card options. The country selection only changes currency and estimated VAT. Device verification uses the browser’s platform WebAuthn prompt, while the test payment result is still handled locally without a payment gateway.
+        </p>
+        <button class="dark-button" type="button" data-plan="Plus">Preview checkout</button>
+      </div>
+
+      <div class="payment-panel" aria-label="Diners Club payment methods preview">
+        <div class="panel-header">
+          <div>
+            <span class="status-dot"></span>
+            <strong id="localPaymentTitle">Diners Club options</strong>
+          </div>
+          <span class="secure-label">Secure checkout</span>
+        </div>
+        <div class="method-preview-grid" id="methodPreviewGrid"></div>
+        <div class="compliance-row">
+          <span>Diners Club only</span>
+          <span>VAT estimate</span>
+          <span>No gateway connected</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-section" aria-labelledby="trust-title">
+      <p class="section-kicker">Designed for clarity</p>
+      <h2 id="trust-title">What this European checkout includes</h2>
+      <div class="trust-grid">
+        <article>
+          <span class="number">01</span>
+          <h3>Local currencies</h3>
+          <p>EUR across the EEA, with GBP and CHF shown for the United Kingdom and Switzerland.</p>
+        </article>
+        <article>
+          <span class="number">02</span>
+          <h3>VAT details</h3>
+          <p>Country-based estimated tax, optional business VAT ID and invoice-ready billing fields.</p>
+        </article>
+        <article>
+          <span class="number">03</span>
+          <h3>Diners Club network</h3>
+          <p>Only Diners Club International, Diners Club Corporate and related Discover network cards are shown.</p>
+        </article>
+        <article>
+          <span class="number">04</span>
+          <h3>Authentication</h3>
+          <p>Platform WebAuthn can open Touch ID, Face ID, Windows Hello, Android biometrics, or the device passcode on supported devices.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand footer-brand">
+      <span class="brand-mark image-mark" aria-hidden="true"><img src="agentaislm-logo.png" alt="" /></span>
+        <span>AgentAISLM</span>
+    </div>
+    <p>Front-end prototype only. Accounts stay in this browser, no payment gateway is connected, and device verification is requested through the browser’s platform WebAuthn API.</p>
+  </footer>
+
+  <div class="modal-backdrop settings-backdrop" id="settingsModal" aria-hidden="true">
+    <section class="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <button class="close-button settings-close" type="button" id="closeSettings" aria-label="Close settings">×</button>
+      <p class="section-kicker">Personal preferences</p>
+      <h2 id="settingsTitle">Settings</h2>
+      <p class="settings-intro">Language and appearance choices are stored only in this browser.</p>
+
+      <div class="settings-list">
+        <label class="setting-row">
+          <span><strong>Language</strong><small>Translate the complete interface.</small></span>
+          <select id="languageSetting">
+            <option value="zh-CN">简体中文</option>
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </label>
+
+        <label class="setting-row">
+          <span><strong>Appearance</strong><small>Choose light, dark, or follow your device.</small></span>
+          <select id="themeSetting">
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
+
+        <label class="setting-row">
+          <span><strong>Text size</strong><small>Adjust readability across the interface.</small></span>
+          <select id="fontSizeSetting">
+            <option value="small">Small</option>
+            <option value="normal">Default</option>
+            <option value="large">Large</option>
+          </select>
+        </label>
+
+        <label class="setting-row">
+          <span><strong>Interface density</strong><small>Control spacing in cards and forms.</small></span>
+          <select id="densitySetting">
+            <option value="comfortable">Comfortable</option>
+            <option value="compact">Compact</option>
+          </select>
+        </label>
+
+        <label class="setting-row switch-row">
+          <span><strong>High contrast</strong><small>Increase borders and text contrast.</small></span>
+          <input type="checkbox" id="contrastSetting" />
+        </label>
+
+        <label class="setting-row switch-row">
+          <span><strong>Reduce motion</strong><small>Disable most interface animations.</small></span>
+          <input type="checkbox" id="motionSetting" />
+        </label>
+      </div>
+
+      <div class="settings-actions">
+        <button class="ghost-button reset-settings" type="button" id="resetSettings">Reset settings</button>
+        <button class="dark-button" type="button" id="doneSettings">Done</button>
+      </div>
+      <p class="settings-note">These preferences use localStorage and are never sent to a server.</p>
+    </section>
+  </div>
+
+  <div class="modal-backdrop auth-backdrop" id="authModal" aria-hidden="true">
+    <section class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="close-button auth-close" type="button" id="closeAuth" aria-label="Close authentication">×</button>
+
+      <div class="auth-brand">
+        <span class="brand-mark image-mark" aria-hidden="true"><img src="agentaislm-logo.png" alt="" /></span>
+        <span>AgentAISLM</span>
+      </div>
+
+      <div id="authFormsView">
+        <p class="section-kicker">Browser-only account</p>
+        <h2 id="authTitle">Welcome back</h2>
+        <p class="auth-intro" id="authIntro">Log in with an account stored only in this browser.</p>
+
+        <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+          <button type="button" class="auth-tab active" data-auth-mode="login" role="tab">Log in</button>
+          <button type="button" class="auth-tab" data-auth-mode="register" role="tab">Create account</button>
+        </div>
+
+        <form id="authForm" novalidate>
+          <label class="field hidden" id="authNameField">
+            <span>Display name</span>
+            <input type="text" id="authName" autocomplete="name" placeholder="Your name" />
+            <small class="error-message">Enter at least 2 characters.</small>
+          </label>
+          <label class="field">
+            <span>Email address</span>
+            <input type="email" id="authEmail" autocomplete="email" placeholder="name@example.com" required />
+            <small class="error-message">Enter a valid email address.</small>
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" id="authPassword" autocomplete="current-password" placeholder="At least 6 characters" required />
+            <small class="error-message">Use at least 6 characters.</small>
+          </label>
+          <label class="field hidden" id="authConfirmField">
+            <span>Confirm password</span>
+            <input type="password" id="authConfirmPassword" autocomplete="new-password" placeholder="Repeat your password" />
+            <small class="error-message">Passwords must match.</small>
+          </label>
+          <p class="auth-error" id="authError" role="alert"></p>
+          <button class="dark-button auth-submit" type="submit" id="authSubmitButton">Log in</button>
+        </form>
+
+        <p class="auth-note">Simulation only. Account data is kept in this browser's localStorage. Do not reuse a real password.</p>
+      </div>
+
+      <div class="account-view hidden" id="accountView">
+        <p class="section-kicker">Signed in locally</p>
+        <div class="account-avatar" id="accountAvatar">O</div>
+        <h2 id="accountName">AgentAISLM user</h2>
+        <p id="accountEmail">name@example.com</p>
+        <div class="account-actions">
+          <button class="dark-button" type="button" id="continueAccount">Continue</button>
+          <button class="ghost-button account-logout" type="button" id="logoutButton">Log out</button>
+        </div>
+        <p class="auth-note">This session exists only in this browser and is not connected to a server.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="checkoutModal" aria-hidden="true">
+    <section class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <button class="close-button" type="button" id="closeCheckout" aria-label="Close checkout">×</button>
+
+      <div class="checkout-progress" aria-label="Checkout progress">
+        <span class="active">Plan</span>
+        <span class="active">Details</span>
+        <span>Confirm</span>
+      </div>
+
+      <div class="checkout-layout">
+        <div class="checkout-form-column">
+          <div class="checkout-heading">
+            <p class="section-kicker">Secure checkout</p>
+            <h2 id="checkoutTitle">Complete your subscription</h2>
+            <p id="checkoutCountryText">Billing in Germany · EUR</p>
+          </div>
+
+          <form id="checkoutForm" novalidate>
+            <div class="form-section">
+              <div class="form-section-heading">
+                <h3>Contact</h3>
+                <span>1 of 3</span>
+              </div>
+              <label class="field">
+                <span>Email address</span>
+                <input type="email" id="email" autocomplete="email" placeholder="name@example.com" required />
+                <small class="error-message">Enter a valid email address.</small>
+              </label>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-heading">
+                <h3>Billing details</h3>
+                <span>2 of 3</span>
+              </div>
+              <div class="two-column-fields">
+                <label class="field">
+                  <span>First name</span>
+                  <input type="text" id="firstName" autocomplete="given-name" required />
+                  <small class="error-message">Required.</small>
+                </label>
+                <label class="field">
+                  <span>Last name</span>
+                  <input type="text" id="lastName" autocomplete="family-name" required />
+                  <small class="error-message">Required.</small>
+                </label>
+              </div>
+              <label class="field">
+                <span>Address</span>
+                <input type="text" id="address" autocomplete="street-address" placeholder="Street and number" required />
+                <small class="error-message">Required.</small>
+              </label>
+              <div class="two-column-fields postal-row">
+                <label class="field">
+                  <span>Postal code</span>
+                  <input type="text" id="postalCode" autocomplete="postal-code" required />
+                  <small class="error-message">Required.</small>
+                </label>
+                <label class="field">
+                  <span>City</span>
+                  <input type="text" id="city" autocomplete="address-level2" required />
+                  <small class="error-message">Required.</small>
+                </label>
+              </div>
+              <label class="checkbox-row">
+                <input type="checkbox" id="businessPurchase" />
+                <span>This is a business purchase</span>
+              </label>
+              <label class="field hidden" id="vatField">
+                <span>EU / UK VAT number</span>
+                <input type="text" id="vatNumber" placeholder="DE123456789" />
+                <small>Demo field — no live VIES validation is performed.</small>
+              </label>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-heading">
+                <h3>Diners Club payment method</h3>
+                <span>3 of 3</span>
+              </div>
+              <div class="payment-method-list" id="paymentMethodList"></div>
+              <div id="paymentFields" class="payment-fields"></div>
+            </div>
+
+            <label class="checkbox-row consent-row">
+              <input type="checkbox" id="termsConsent" required />
+              <span>I agree to the subscription terms and recurring billing.</span>
+            </label>
+            <small class="form-error" id="formError">Please complete the highlighted fields.</small>
+
+            <button class="pay-button" type="submit" id="payButton">
+              <span>Attempt Diners Club payment</span>
+              <strong id="payButtonAmount">€3.25</strong>
+            </button>
+            <p class="sca-note">Use only the designated test card. No gateway is connected and no live payment is processed.</p>
+          </form>
+        </div>
+
+        <aside class="order-summary">
+          <div class="summary-sticky">
+            <p class="section-kicker">Order summary</p>
+            <div class="selected-plan-row">
+              <div>
+                <h3 id="summaryPlanName">Plus</h3>
+                <p id="summaryCycle">Monthly subscription</p>
+              </div>
+              <strong id="summaryBasePrice">€2.73</strong>
+            </div>
+            <div class="summary-lines">
+              <div><span>Subtotal</span><span id="summarySubtotal">€2.73</span></div>
+              <div><span id="summaryTaxLabel">Estimated VAT (19%)</span><span id="summaryTax">€0.52</span></div>
+              <div class="summary-total"><span>Total today</span><span id="summaryTotal">€3.25</span></div>
+            </div>
+            <div class="summary-note">
+              <strong>Renewal</strong>
+              <p id="renewalText">Renews monthly. Cancel before the next billing date.</p>
+            </div>
+            <div class="security-list">
+              <span>✓ Diners Club-only interface</span>
+              <span>✓ No payment gateway connected</span>
+              <span>✓ Platform WebAuthn device verification</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop biometric-backdrop" id="biometricModal" aria-hidden="true">
+    <section class="biometric-modal" role="dialog" aria-modal="true" aria-labelledby="biometricTitle">
+      <button class="close-button biometric-close" type="button" id="closeBiometric" aria-label="Close device verification">×</button>
+
+      <div class="biometric-brand">
+        <img src="agentaislm-logo.png" alt="" />
+        <span>AgentAISLM Secure</span>
+      </div>
+      <p class="section-kicker">System identity verification</p>
+      <h2 id="biometricTitle">Confirm on this device</h2>
+      <p class="biometric-intro">The browser will open your device’s official platform authenticator, such as Touch ID, Face ID, Windows Hello, Android biometrics, or the device passcode.</p>
+
+      <div class="biometric-scanner" id="biometricScanner" data-method="platform" aria-live="polite">
+        <div class="scanner-corners" aria-hidden="true"></div>
+        <div class="scanner-line" aria-hidden="true"></div>
+        <div class="bio-symbol bio-device active" data-bio-visual="platform" aria-hidden="true">
+          <svg viewBox="0 0 96 96"><rect x="20" y="15" width="56" height="66" rx="9"/><path d="M35 43c0-8 5-14 13-14s13 6 13 14M39 58c-3-4-4-9-4-14M57 58c3-4 4-9 4-14M43 68c3 2 7 2 10 0"/><circle cx="48" cy="71" r="3"/></svg>
+        </div>
+      </div>
+      <p class="biometric-status" id="biometricStatus">Checking platform authenticator support…</p>
+
+      <div class="device-auth-card" id="deviceAuthCard">
+        <span class="device-auth-icon" aria-hidden="true">◉</span>
+        <div>
+          <strong id="deviceAuthName">Device verification</strong>
+          <small id="deviceAuthDetail">Touch ID, Face ID, Windows Hello, Android biometrics, or device passcode</small>
+        </div>
+        <span class="device-auth-state" id="deviceAuthState">Checking…</span>
+      </div>
+
+      <div class="secure-context-warning hidden" id="secureContextWarning">
+        Open this project through HTTPS or localhost. WebAuthn cannot run from a normal file:// page.
+      </div>
+
+      <button class="pay-button biometric-start" type="button" id="startBiometric">
+        <span>Use device verification</span><strong>WEBAUTHN</strong>
+      </button>
+      <button class="ghost-button reset-device-credential" type="button" id="resetDeviceCredential">Register this device again</button>
+      <p class="biometric-note">Your operating system handles the biometric or device-password check. This page receives only a signed WebAuthn credential response and never receives a fingerprint image, face scan, or biometric template. Because this project has no backend, the response is accepted locally for demonstration and is not production-grade payment authorization.</p>
+    </section>
+  </div>
+
+  <div class="result-screen success-screen" id="successScreen" aria-hidden="true">
+    <div class="result-shell success-shell">
+      <div class="result-topbar">
+        <div class="result-brand"><img src="agentaislm-logo.png" alt="" /><span>AgentAISLM</span></div>
+        <span class="result-status success-status">Payment successful</span>
+      </div>
+      <div class="result-hero">
+        <div class="result-orbit success-orbit"><div class="result-icon">✓</div></div>
+        <p class="section-kicker">Payment completed</p>
+        <h2>Your subscription is ready.</h2>
+        <p>Your device completed a platform WebAuthn verification and the approved test card matched. No real money was charged, and this page never received biometric data.</p>
+      </div>
+      <div class="result-summary">
+        <div><span>Plan</span><strong id="successPlan">Plus · Monthly</strong></div>
+        <div><span>Amount</span><strong id="successAmount">€5.95</strong></div>
+        <div><span>Verified with</span><strong id="successBiometric">Device verification</strong></div>
+        <div><span>Reference</span><strong id="successReference">LOCAL-0000000</strong></div>
+      </div>
+      <div class="result-actions">
+        <button class="dark-button" type="button" id="closeSuccess">Return to pricing</button>
+        <button class="ghost-button result-secondary" type="button" id="successAgain">Try another payment</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-screen failure-screen" id="failureScreen" aria-hidden="true">
+    <div class="result-shell failure-shell">
+      <div class="result-topbar">
+        <div class="result-brand"><img src="agentaislm-logo.png" alt="" /><span>AgentAISLM</span></div>
+        <span class="result-status failure-status">Payment unsuccessful</span>
+      </div>
+      <div class="result-hero">
+        <div class="result-orbit failure-orbit"><div class="result-icon">×</div></div>
+        <p class="section-kicker">Payment not completed</p>
+        <h2>We could not finish this payment.</h2>
+        <p id="failureReason">Device verification was cancelled or the card was not approved for this local test payment. No money was charged and no biometric data was exposed to this page.</p>
+      </div>
+      <div class="result-summary">
+        <div><span>Plan</span><strong id="failurePlan">Plus · Monthly</strong></div>
+        <div><span>Amount</span><strong id="failureAmount">€5.95</strong></div>
+        <div><span>Attempted with</span><strong id="failureBiometric">Device verification</strong></div>
+        <div><span>Status</span><strong id="failureStatus">Not completed</strong></div>
+      </div>
+      <div class="result-actions">
+        <button class="dark-button failure-primary" type="button" id="retryPayment">Try again</button>
+        <button class="ghost-button result-secondary" type="button" id="closeFailure">Return to pricing</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
