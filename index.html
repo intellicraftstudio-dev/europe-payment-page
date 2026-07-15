@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=3" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=3" />
   <meta name="theme-color" content="#6655e8" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles-v6.css" />
 </head>
 <body>
   <header class="site-header">
@@ -529,12 +529,6 @@
         <h2>Your subscription is ready.</h2>
         <p>Your AgentAISLM access has been activated. Your token plan and developer credentials are ready to use.</p>
       </div>
-      <div class="result-summary">
-        <div><span>Plan</span><strong id="successPlan">Plus · Monthly</strong></div>
-        <div><span>Amount</span><strong id="successAmount">€5.95</strong></div>
-        <div><span>Verified with</span><strong id="successBiometric">Device verification</strong></div>
-        <div><span>Reference</span><strong id="successReference">LOCAL-0000000</strong></div>
-      </div>
       <section class="yc-api-card" aria-labelledby="ycApiTitle">
         <div class="yc-api-heading">
           <div>
@@ -552,6 +546,12 @@
         </div>
         <p class="yc-api-help">Keep this key private. Use it to authenticate requests to the 宜創 API.</p>
       </section>
+      <div class="result-summary">
+        <div><span>Plan</span><strong id="successPlan">Plus · Monthly</strong></div>
+        <div><span>Amount</span><strong id="successAmount">€5.95</strong></div>
+        <div><span>Verified with</span><strong id="successBiometric">Device verification</strong></div>
+        <div><span>Reference</span><strong id="successReference">LOCAL-0000000</strong></div>
+      </div>
       <div class="result-actions">
         <button class="dark-button" type="button" id="closeSuccess">Return to pricing</button>
         <button class="ghost-button result-secondary" type="button" id="successAgain">Try another payment</button>
@@ -586,6 +586,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js?v=5"></script>
+  <script src="script-v6.js"></script>
 </body>
 </html>
